@@ -1,0 +1,32 @@
+name: Build and Deploy
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Add hash.json and version.json
+        shell: bash
+        run: |
+            hash=`git rev-parse --short "$GITHUB_SHA"`
+            version=`echo ${GITHUB_REF#refs/*/}`
+            echo "\"$hash\"" > src/assets/hash.json
+            echo "\"$version\"" > src/assets/version.json
+
+      - name: Install and Build 🔧
+        run: npm ci && npm run build
+        env:
+          FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
+
+      - name: Deploy 🚀
+        if: ${{ !env.ACT }}
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: dist
