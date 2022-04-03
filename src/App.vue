@@ -125,6 +125,8 @@ export default {
 
   color: #f8f9fa !important;
   background-color: #2c3034 !important;
+
+  cursor: default;
 }
 
 </style>

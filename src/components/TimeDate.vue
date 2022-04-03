@@ -1,13 +1,13 @@
 <template>
   <div class="TimeDate mt-3">
     <div class="row">
-      <div class="col col-sm-12 col-md-6 col-lg-6">
+      <div class="col col-12 col-md-6 col-lg-6">
         <h1 class="display-6 m-0">Aktuell:</h1>
         <h1 class="display-1 time">{{ time }}</h1>
         <h1 class="display-6 date">{{ date }}</h1>
       </div>
-      <div class=" col col-sm-12 col-md-6 col-lg-6">
-        <h1 class="display-6" @click="setOffset">+ {{ timeOffset }} Min:</h1>
+      <div class=" col col-12 col-md-6 col-lg-6">
+        <h1 class="display-6" style="cursor: pointer" @click="setOffset">+ {{ timeOffset }} Min:</h1>
         <h1 class="display-3 time">{{ time_add5 }}</h1>
         <!-- <input v-model.number="timeOffset" class=" form-control-sm" type="number"> -->
       </div>
@@ -63,17 +63,12 @@ export default {
 }
 
 .time {
-
   margin-bottom: 0;
   font-weight: bold !important;
 }
 
 .date {
   margin-bottom: 0.5em;
-}
-
-.display-1 {
-
 }
 
 </style>
